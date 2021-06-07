@@ -1,0 +1,381 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_LB_5"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="WPF_LB_5.WorkWindow"
+        mc:Ignorable="d" Height="600" Width="800" ScrollViewer.CanContentScroll="True"
+        WindowStartupLocation="Manual"
+        Closing="Window_Closing" MinWidth="600" MinHeight="397" Background="#FFF4F9F9" Title="MANAGE PRODUCTS" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Icon="bookshelf_icon-icons.com_54414.png">
+    <Window.Resources>
+        <Color x:Key="Color1">#FF5D5D5D</Color>
+
+    </Window.Resources>
+    <ScrollViewer Margin="1" CanContentScroll="False"
+              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <Grid>
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="72"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="123*"/>
+            <ColumnDefinition Width="38*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal"  Grid.Row="0" Background="#FF673AB7"
+                    Grid.ColumnSpan="3" Grid.RowSpan="2">
+
+
+
+            <materialDesign:ColorZone
+                Mode="PrimaryMid"
+                Padding="16" VerticalAlignment="Stretch">
+                <DockPanel>
+                    <StackPanel     
+                        Orientation="Horizontal"    
+                        materialDesign:RippleAssist.IsCentered="True">
+
+                        <Button 
+                            x:Name="btnHome"
+                            Click="btnHome_Click"
+                            Style="{StaticResource MaterialDesignToolForegroundButton}"
+                            ToolTip="Home">
+                            <materialDesign:PackIcon Kind="HomeAccount"  Height="30" Width="30"/>
+                        </Button>
+                        <ComboBox x:Name="cmbSearch" ToolTip="Search by"      
+                            SelectedIndex="0"       
+                            Margin="2 0 0 0"        
+                            BorderThickness="0"        
+                            materialDesign:ColorZoneAssist.Mode="Standard"       
+                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"       
+                            BorderBrush="{DynamicResource MaterialDesignPaper}">
+                            <ComboBoxItem
+                                Content="Title" />
+                            <ComboBoxItem
+                                Content="Author" />
+                            <ComboBoxItem
+                                Content="Genre" />
+                        </ComboBox>
+
+                        <materialDesign:ColorZone        
+                            Mode="Standard"        
+                            Padding="8 4 8 4"       
+                            CornerRadius="2"
+                            Panel.ZIndex="1"        
+                            Margin="16 0 0 0"       
+                            materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition            
+                                        Width="Auto" />
+                                    <ColumnDefinition             
+                                        Width="*" />
+                                    <ColumnDefinition
+                                       Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btbSearch" Click="btbSearch_Click"            
+                                    Style="{DynamicResource MaterialDesignToolButton}">
+                                    <materialDesign:PackIcon              
+                                       Kind="Search"              
+                                        Opacity=".56" />
+                                </Button>
+                                <TextBox x:Name="tblSearch"          
+                                    Grid.Column="1"            
+                                    Margin="8 0 0 0"            
+                                    materialDesign:HintAssist.Hint="Search"           
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"           
+                                    BorderThickness="0"            
+                                    MinWidth="200"           
+                                    VerticalAlignment="Center" />
+                            </Grid>
+                        </materialDesign:ColorZone>
+                        <materialDesign:PopupBox
+                            Style="{StaticResource MaterialDesignPopupBox}"
+                            PlacementMode="BottomAndAlignCentres"
+                            ToolTipService.Placement="Right"
+                            ToolTip="TOP - 10">
+                            <StackPanel>
+                                <Button
+                                    x:Name="btnTopBooks"
+                                    Click="btnTopBooks_Click"
+                                    ToolTip="TOP-10 Books"
+                                    Content="Books" />
+                                <Button
+                                    x:Name="btnTopAuthors"
+                                    Click="btnTopAuthors_Click"
+                                    ToolTip="TOP-10 Authors"
+                                    Content="Authors" />
+                                <Button
+                                    x:Name="btnTopGebres"
+                                    Click="btnTopGebres_Click"
+                                    ToolTip="TOP-10 Genres"
+                                    Content="Genres" />
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                        <Button x:Name="btnRefresh" Click="btnRefresh_Click"
+                            Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                            ToolTip="Refresh"
+                            Panel.ZIndex="0" Foreground="#DDFFFFFF" BorderBrush="#00000000">
+                            <materialDesign:PackIcon Kind="RefreshCircle"  Height="25" Width="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </materialDesign:ColorZone>
+
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Account"  Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label x:Name="lbName" Content="MANAGER"  FontWeight="Bold" Foreground="#FFF7F6E7" VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Label x:Name="lbDate" Content="Date" Foreground="#FFF7F6E7" HorizontalContentAlignment="Center" Padding="1"/>
+                <Label x:Name="lbTame" Content="Tame" Foreground="#FFF7F6E7" HorizontalContentAlignment="Center" Padding="1"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <materialDesign:Badged x:Name="countStaffinCart" ToolTip="Items in the basket" Badge="0" VerticalAlignment="Center">
+                    <Button x:Name="btnTotalSale"
+                        Click="btnTotalSale_Click"
+                        Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                        ToolTip="Сheckout">
+                        <materialDesign:PackIcon Kind="CartOutline"  Height="30" Width="30" VerticalAlignment="Stretch" Foreground="#DDFFFFFF"/>
+                    </Button>
+                </materialDesign:Badged>
+                <Label x:Name="lbCheck" Content="0" Margin="6 0 0 0" FontWeight="Bold" Foreground="#FFF7F6E7" VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="CurrencyUsd" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF7F6E7" />
+            </StackPanel>
+
+
+
+
+        </StackPanel>
+
+        <StackPanel x:Name="stckMenu" Orientation="Vertical" Grid.Column="0" Grid.Row="2">
+            <materialDesign:Flipper x:Name="FliperBookInfo" Style="{StaticResource MaterialDesignCardFlipper}" 
+                                        VerticalAlignment="Top" Background="#FFFAFAFA" Margin="10" 
+                                        ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                <materialDesign:Flipper.FrontContent>
+                    <Button x:Name="btnOpenFliperBookInfo"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                    Margin="10"
+                                    Content="Book information"
+                                    ToolTip="Book Overview"
+                                    Click="btnOpenFliperBookInfo_Click"
+                                    />
+                </materialDesign:Flipper.FrontContent>
+                <materialDesign:Flipper.BackContent>
+                    <Grid MaxWidth="350" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                            Height="auto" />
+                            <RowDefinition
+                                            Height="*" />
+                        </Grid.RowDefinitions>
+                        <materialDesign:ColorZone
+                                        Mode="SecondaryMid"
+                                        Padding="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnCloseFliperBookInfo"
+                                                Click="btnCloseFliperBookInfo_Click"
+                                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="ArrowLeft" HorizontalAlignment="Right" />
+                                </Button>
+
+                                <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="BOOK INFORMATION" />
+
+                                <Button
+                                                x:Name="btnEditDescr" Click="btnEditDescr_Click"
+                                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                                ToolTip="Edit Description">
+                                    <materialDesign:PackIcon Kind="PencilOutline"  Height="25" Width="25"/>
+                                </Button>
+                                <Button
+                                        x:Name="btnSaveDescr" Click="btnSaveDescr_Click"
+                                        Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                        ToolTip="Save"
+                                        Visibility="Collapsed">
+                                    <materialDesign:PackIcon Kind="ContentSaveEditOutline"  Height="25" Width="25"/>
+                                </Button>
+                                <Button
+                                        x:Name="btnCancelDescr" Click="btnCancelDescr_Click"
+                                        Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                        ToolTip="Cansel"
+                                        Visibility="Collapsed">
+                                    <materialDesign:PackIcon Kind="Cancel"  Height="25" Width="25"/>
+                                </Button>
+                            </StackPanel>
+                        </materialDesign:ColorZone>
+                        <Grid
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+
+                            <StackPanel x:Name="pnlUrl" Orientation="Vertical" Grid.Row="1" VerticalAlignment="Bottom">
+                                <Image x:Name="img" Width="260" Height="300" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+                                <TextBox
+                                            x:Name="tbxBookDescr"
+                                            Grid.Row="1"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Stretch"
+                                            AcceptsReturn="True"
+                                            VerticalScrollBarVisibility="Auto"
+                                            HorizontalScrollBarVisibility="Auto"
+                                            SpellCheck.IsEnabled="True"
+                                            IsReadOnly="True"
+                                            materialDesign:HintAssist.IsFloating="True"
+                                            Margin="0 6 0 0"
+                                            FontSize="14"
+                                            MaxHeight="400" MaxWidth="350"
+                                            Text="Description" />
+                                <TextBox x:Name="txbUrlImg"
+                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                             VerticalAlignment="Top"
+                                             Visibility="Collapsed"
+                                             materialDesign:HintAssist.Hint="Url Img" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Flipper.BackContent>
+            </materialDesign:Flipper>
+            <TextBox x:Name="tbxTitle" Margin="5" 
+                     materialDesign:HintAssist.Hint="Title"
+                     materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <ComboBox x:Name="CombAuthor" Margin="5" 
+                     materialDesign:HintAssist.Hint="Author"
+                     materialDesign:TextFieldAssist.HasClearButton="True" IsEditable="True"/>
+            <ComboBox x:Name="CombGenre" Margin="5" 
+                     materialDesign:HintAssist.Hint="Genre"
+                     materialDesign:TextFieldAssist.HasClearButton="True" IsEditable="True"/>
+            <TextBox x:Name="tbxYear" Margin="5" 
+                     materialDesign:HintAssist.Hint="Year"
+                     materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <TextBox x:Name="tbxAmount" Margin="5" 
+                     materialDesign:HintAssist.Hint="Amount"
+                     materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <TextBox x:Name="tbxPages" Margin="5" 
+                     materialDesign:HintAssist.Hint="Pages"
+                     materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <ComboBox x:Name="CombPublisher" Margin="5" 
+                     materialDesign:HintAssist.Hint="Publisher"
+                     materialDesign:TextFieldAssist.HasClearButton="True" IsEditable="True"/>
+            <TextBox x:Name="tbxCost" Margin="5" 
+                     materialDesign:HintAssist.Hint="Cost price"
+                     materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <TextBox x:Name="tbxSale" Margin="5" 
+                     materialDesign:HintAssist.Hint="Sale price"
+                     materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <ComboBox x:Name="CombSeries" Margin="5" 
+                     materialDesign:HintAssist.Hint="Series"
+                     materialDesign:TextFieldAssist.HasClearButton="True" IsEditable="True"/>
+            <StackPanel x:Name="btnsCanSav" Visibility="Collapsed" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <Button x:Name="btnSave" Content="SAVE" Margin="5" Click="btnSave_Click" Width="100" Background="#00000000" Foreground="#FFAEEA00" />
+                <Button x:Name="btnCansel" Content="CANCEL" Margin="5" Click="btnCansel_Click" Width="100" Background="Transparent" Foreground="#DDF00606"/>
+
+            </StackPanel>
+            <StackPanel Grid.Column="0" Margin="10,0,0,0" Grid.Row="1"  >
+
+                <Button x:Name="btnAdd" 
+                        Margin="5" 
+                        Content="Add" 
+                        Click="btnAdd_Click" 
+                        Style="{StaticResource MaterialDesignFlatAccentBgButton}" 
+                        MaxWidth="200"
+                         ToolTip="Add book"/>
+                <Button x:Name="btnEdit" Margin="5" Content="EDIT" 
+                        Click="btnEdit_Click"
+                        MaxWidth="200"
+                        ToolTip="Edit book"/>
+                <Button x:Name="btnDel" Margin="5" Click="btnDel_Click"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        ToolTip="Delete book"
+                        Content="DELETE" MaxWidth="200"  />
+            </StackPanel>
+
+        </StackPanel>
+
+
+
+
+        <StackPanel Orientation="Vertical" Grid.Column="1"  Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <ToolBarTray>
+                <ToolBar
+                    Style="{DynamicResource MaterialDesignToolBar}"
+                    ClipToBounds="False">
+                    <Button 
+                    x:Name="btnSale"
+                    Click="btnSale_Click"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Sale book"
+                    Content="{materialDesign:PackIcon CartArrowDown}"  />
+                    <Button x:Name="btnMinOun"
+                    Click="btnMinOun_Click"  
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Defective goods, send for processing"
+                    Content="{materialDesign:PackIcon BookMinusMultipleOutline}" />
+                    <Separator />
+                </ToolBar>
+            </ToolBarTray>
+
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1"  Grid.Row="2" VerticalAlignment="Top">
+                <DataGrid x:Name="BaseGrid" Margin="5" HorizontalScrollBarVisibility="Visible" MaxHeight="800"
+                      VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"  SelectionMode="Single"
+                      IsReadOnly="True" IsManipulationEnabled="True"
+                      HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" OpacityMask="Black" Foreground="Black" SelectionChanged="BaseGrid_SelectionChanged" VerticalAlignment="Top" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" HorizontalAlignment="Left">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#FFAEEA00" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Style>
+                        <StaticResource ResourceKey="MaterialDesignDataGrid"/>
+                    </DataGrid.Style>
+                </DataGrid>
+                
+
+
+
+
+
+            </StackPanel>
+        </StackPanel>
+
+
+
+
+
+
+    </Grid>
+    </ScrollViewer>
+</Window>
