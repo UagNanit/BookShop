@@ -24,6 +24,7 @@ namespace WPF_LB_5
 
             RefreshBooks();
             LoadBooks();
+            
 
             userName = login;
             lbName.Content = login;
