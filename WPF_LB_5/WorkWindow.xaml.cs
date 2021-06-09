@@ -44,7 +44,7 @@ namespace WPF_LB_5
         private int tempIdEditDescr;//для временного хранения id описания книги 
 
         TimerCallback tm;
-        Timer time;
+        Timer time;//
 
         private void saleBooks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
